@@ -39,6 +39,9 @@ app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+
+app.use('/music', express.static(path.join(__dirname, 'uploads')));
+
 // Маршрути
 app.use("/api", apiRouter);
 app.use("/api/auth", authRoutes);

@@ -29,4 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
       soundSlider.style.background = `linear-gradient(to right, orange 0%, orange ${percent}%, gray ${percent}%, gray 100%)`;
     });
 
+
+
+    const audio = new Audio('http://localhost:3000/music/track1.mp3');
+    audio.play();
+
 });

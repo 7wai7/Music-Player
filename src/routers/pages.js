@@ -26,7 +26,7 @@ router.get("/auth", auth, async (req, res) => {
         res.render("main", {
             main: "./auth",
             stylesheets: ['auth', 'header', 'footer', 'sidebar', 'song', 'comment'],
-            scripts: ['index'],
+            scripts: ['auth'],
             title: "Авторизація",
             user: req.user,
         })

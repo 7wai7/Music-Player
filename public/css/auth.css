@@ -11,12 +11,30 @@
     margin-bottom: 20px;
 }
 
+.auth-block .panel {
+    width: 100%;
+    max-width: 300px;
+}
+
 .auth-block input {
     border: 2px solid lightgray;
     border-radius: 20px;
+    outline: none;
     padding: 8px 10px;
     width: 100%;
-    max-width: 300px;
+    box-sizing: border-box;
+}
+
+.auth-block input.error {
+    border-color: red;
+}
+
+.auth-block .error-message {
+    padding: 0 10px;
+    margin-top: 10px;
+    color: red;
+    font-size: 12px;
+    width: 100%;
 }
 
 #submit-btn {
@@ -35,6 +53,6 @@
     color: #000;
 }
 
-#signup-btn:hover {
+#toggle-form-btn:hover {
     color: orange;
 }

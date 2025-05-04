@@ -1,9 +1,26 @@
-<div class="auth-block page-block">
+<form id="auth-form" class="auth-block page-block">
     <h3 id="title">Увійти в акаунт</h3>
-    <input type="text" placeholder="Ім'я" id="login" hidden>
-    <input type="email" placeholder="Пошта" id="email">
-    <input type="password" placeholder="Пароль" id="password">
-    <input type="password" placeholder="Підтвердження пароля" id="confirm-password" hidden>
+
+    <div id="login-panel" class="panel" style="display: none;">
+        <input id="login" type="text" placeholder="Ім'я">
+        <div class="error-message"></div>
+    </div>
+
+    <div id="email-panel" class="panel">
+        <input id="email" type="email" placeholder="Пошта">
+        <div class="error-message"></div>
+    </div>
+
+    <div id="password-panel" class="panel">
+        <input id="password" type="password" placeholder="Пароль">
+        <div class="error-message"></div>
+    </div>
+
+    <div id="confirm-password-panel" class="panel" style="display: none;">
+        <input id="confirm-password" type="password" placeholder="Підтвердження пароля">
+        <div class="error-message"></div>
+    </div>
+
     <button id="submit-btn">Увійти</button>
-    <button id="signup-btn">Створити акаунт</button>
-</div>
+    <button id="toggle-form-btn">Створити акаунт</button>
+</form>
