@@ -1,0 +1,177 @@
+footer {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-flow: column;
+    position: fixed;
+    inset: auto auto 0 auto;
+    box-sizing: border-box;
+}
+
+.orange-hover .active,
+.orange-hover:hover svg,
+.orange-hover:hover path,
+.orange-hover:hover g {
+    fill: orange;
+    stroke: orange;
+}
+
+#repeat-btn .active,
+#repeat-btn:hover svg {
+    stroke: orange;
+}
+
+#like-btn .active,
+#like-btn:hover path {
+    stroke: lightgreen;
+}
+
+#dislike-btn .active,
+#dislike-btn:hover path {
+    stroke: red;
+}
+
+#add-to-playlist-btn:hover svg {
+    fill: orange;
+}
+
+#download:hover path {
+    fill: orange;
+}
+
+
+  
+#song-slider {
+    -webkit-appearance: none; /* Прибрати стандартний вигляд */
+    width: 100%;
+    height: 14px;
+    background: linear-gradient(to right, orange 0%, lightgray 0%);
+    border-radius: 0;
+    outline: none;
+}
+
+/* Прибрати повзунок */
+#song-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
+}
+
+#song-slider::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
+}
+
+footer input[type="range" i] {
+    margin: 0;
+}
+
+footer .row {
+    background: #fff;
+    width: auto;
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+footer .controls-left,
+footer .controls-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+footer .controls-right {
+    margin: auto 0 auto auto;
+}
+
+
+footer .metadata {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#song-artist {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#song-title {
+    font-size: 14px;
+}
+
+
+
+.sound-wrapper {
+    position: relative;
+}
+
+.sound-wrapper:hover .vertical-slider-wrapper {
+    display: flex;
+}
+
+#sound-slider {
+    margin: 30px 20px 30px auto;
+}
+
+.equalizer-panel,
+.sound-wrapper .vertical-slider-wrapper {
+    display: none;
+    position: absolute;
+}
+
+
+.vertical-slider-wrapper {
+    left: 50%;
+    width: 200px; /* це стане "висотою", через поворот */
+    transform: rotate(-90deg);
+    transform-origin: left;    /* щоб не зсунуло слайдер */
+}
+
+.vertical-slider {
+    -webkit-appearance: none; /* прибрати дефолтний стиль */
+    background: linear-gradient(to right, orange 50%, gray 50%);
+}
+  
+/* Стилізація треку */
+.vertical-slider::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 0;
+}
+
+/* Стилізація повзунка */
+.vertical-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+
+
+.equalizer-wrapper {
+    position: relative;
+}
+
+.equalizer-panel {
+    background: #456690;
+    display: none;
+    position: absolute;
+    left: 50%;
+    width: 200px; /* це стане "висотою", через поворот */
+    transform: rotate(-90deg);
+    transform-origin: left;    /* щоб не зсунуло слайдер */
+}

@@ -1,0 +1,24 @@
+<h2 class="page-block-top">Виконавці</h2>
+<hr>
+<div class="page-block">
+    <div id="artists-container">
+        <% for (let i = 0; i < 20; i++) { %>
+            <a href="/artist/id" class="artist">
+                <div class="img-wrapper">
+                    <img src="/api/avatar/id">
+                </div>
+                <span class="name">Ім'я</span>
+            </a>
+        <% } %>
+    </div>
+</div>
+<hr>
+<div class="comments">
+    <div class="comments-top">Коментарі</div>
+    <%- include("./partials/add comment") %>
+    <div id="comments-content">
+        <% for (let i = 0; i < 20; i++) { %>
+            <%- include("./partials/comment") %>
+        <% } %>
+    </div>
+</div>

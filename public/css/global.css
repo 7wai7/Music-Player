@@ -1,0 +1,254 @@
+html {
+    height: 100vh;
+}
+
+body {
+    background: rgb(0, 0, 59);
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+button {
+    background: none;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+hr {
+    margin: 0;
+}
+
+
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.avatar {
+    border: 2px solid #000;
+    border-radius: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.page-block {
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-block-top {
+    padding: 20px 30px;
+}
+
+
+.dropdown {
+    width: max-content;
+    position: relative;
+}
+
+.dropdown .content {
+    position: absolute;
+    z-index: 1000;
+    background-color: #ffffff;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+
+.dropdown .content a,
+.dropdown .content button {
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+}
+
+.dropdown .content a:hover,
+.dropdown .content button:hover {
+    background-color: #dddddd;
+}
+
+.dropdown .v-line {
+    background: lightgray;
+    width: 100%;
+    height: 1px;
+}
+
+
+.textarea-autosize {
+    display: block;
+    overflow: hidden;
+    resize: none;
+    outline: none;
+    text-align: justify;
+    white-space: pre-wrap;
+}
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    animation: rotate 1s linear infinite;
+}
+
+
+[hidden]:where(:not([hidden='until-found'])) {
+    display: none !important;
+}
+
+
+
+.info {
+    min-height: 100vh;
+    padding-top: 70px;
+    padding-bottom: 60px;
+    background: #cfcfcf;
+    display: flex;
+    flex-direction: row;
+}
+
+.info,
+header {
+    width: 100%;
+    max-width: 1200px !important;
+    box-sizing: border-box;
+}
+
+#main,
+.sidebar {
+    background: #fff;
+    margin-top: 7px;
+}
+
+#main {
+    width: 70%;
+    margin-right: 7px;
+}
+
+.sidebar {
+    flex: 1;
+}
+
+
+
+#artists-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.artist {
+    display: flex;
+    flex-flow: column;
+}
+
+.artist .img-wrapper {
+    background: #000;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+
+    width: 120px;
+}
+
+.artist span {
+    color: #000;
+    margin: 16px auto 0;
+}
+
+
+.songs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+
+.comments {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.comments-top {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.add-comment-wrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: end;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-comment-textarea {
+    background: transparent;
+    border: 2px solid lightgray;
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 24px;
+}
+
+.add-comment-btn {
+    background: #000;
+    color: #fff;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.add-comment-btn:hover {
+    background: orange;
+    color: #000;
+}
+
+#comments-content {
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+}

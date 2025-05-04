@@ -1,0 +1,138 @@
+<footer>
+    <input type="range" id="song-slider" min="0" max="1000" value="0">
+    <div class="row">
+        <div class="controls-left">
+            <button id="previous-btn" class="orange-hover" style="width: 20px; height: 20px;">
+                <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#000" transform="translate(3.999058)">
+                        <path d="M 16,24 0.3,12 16,0 Z" />
+                        <rect x="0.012203574" y="0.16220379" width="1.9755929" height="23.675592" />
+                    </g>
+                </svg>
+            </button>
+            <button id="play-pause-btn" class="orange-hover" style="width: 24px; height: 24px;">
+                <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 6,1.773 V 22.227 L 21,12.002 Z" fill="#000"></path>
+                </svg>
+                <svg hidden width="100%" height="100%" viewBox="0 0 512 512">
+                    <g transform="matrix(1.4678316,0,0,1.7251122,-119.7649,-185.62872)">
+                        <g transform="translate(170.66667,128)">
+                            <path d="M 0,0 H 42.666667 V 256 H 0 Z m 128,0 h 42.66667 V 256 H 128 Z" fill="#000" />
+                        </g>
+                    </g>
+                </svg>
+            </button>
+            <button id="next-btn" class="orange-hover" style="width: 20px; height: 20px;">
+                <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#000" transform="matrix(0.98765382,0,0,0.97533835,-3.8024612,0.2959398)">
+                        <path d="M 8,24 V 0 l 15.7,12 z" />
+                        <rect x="22.014099" y="-0.13933648" width="1.9718026" height="24.278648" />
+                    </g>
+                </svg>
+            </button>
+            <button id="repeat-btn" style="width: 24px; height: 24px; margin-left: 30px;">
+                <svg width="100%" height="100%" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="5"
+                    stroke="#000000" fill="none">
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M53.72,36.61A21.91,21.91,0,1,1,50.37,20.1"></path>
+                        <polyline points="51.72 7.85 50.85 20.78 37.92 19.9"></polyline>
+                        <path d="M53.72,36.61A21.91,21.91,0,1,1,50.37,20.1"></path>
+                        <polyline points="51.72 7.85 50.85 20.78 37.92 19.9"></polyline>
+                    </g>
+                </svg>
+            </button>
+            <button id="mix-btn" class="orange-hover" style="width: 24px; height: 24px;">
+                <svg viewBox="0 0 512.00 512.00" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
+                    transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)">
+                        <g id="Page-1" stroke-width="0.00512" fill="none" fill-rule="evenodd">
+                            <g id="drop" fill="#000000" transform="translate(42.666667, 70.248389)">
+                                <path
+                                    d="M226.597,200.834611 L296.853333,271.084945 L353.819,271.084 L326.248389,243.503223 L356.418278,213.333333 L435.503223,292.418278 L356.418278,371.503223 L326.248389,341.333333 L353.82,313.751 L279.163435,313.751611 L196.418,231.011611 L226.597,200.834611 Z M356.418278,1.42108547e-14 L435.503223,79.0849447 L356.418278,158.169889 L326.248389,128 L353.82,100.418 L296.853333,100.418278 L83.503232,313.751611 L-1.0658141e-13,313.751611 L-1.03968831e-13,271.084945 L65.8133333,271.084945 L279.163435,57.7516113 L353.82,57.751 L326.248389,30.1698893 L356.418278,1.42108547e-14 Z M83.503232,57.7516113 L166.248,140.490611 L136.069,170.667611 L65.8133333,100.418278 L-1.0658141e-13,100.418278 L-1.0658141e-13,57.7516113 L83.503232,57.7516113 Z"
+                                    id="Combined-Shape"> </path>
+                            </g>
+                        </g>
+                </svg>
+            </button>
+        </div>
+        <div class="metadata">
+            <div id="song-artist">Виконавець</div>
+            <div id="song-title">Назва музики</div>
+        </div>
+        <div class="controls-right">
+            <div class="sound-wrapper">
+                <div class="vertical-slider-wrapper">
+                    <input type="range" id="sound-slider" class="vertical-slider" min="0" max="1" step="0.01" value="0.5">
+                </div>
+                <button id="sound-btn" style="width: 24px; height: 24px;">
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M 11.193,4.452 5.67,9 H 2.376 C 1.6160562,9 1,9.6160562 1,10.376 v 3.248 C 1,14.383944 1.6160562,15 2.376,15 h 3.293 l 5.524,4.548 c 0.33726,0.241599 0.806514,8.66e-4 0.807,-0.414 V 4.866 C 11.999514,4.4511335 11.53026,4.2104008 11.193,4.452 Z m 4.277,0.892 c 1.630488,1.8285126 2.531051,4.1931124 2.53,6.643 0.004,2.457928 -0.911261,4.828512 -2.566,6.646 l -0.74,-0.672 C 16.179573,16.326182 17.001848,14.195971 17,11.987 17.000166,9.7824542 16.18975,7.6548024 14.723,6.009 Z m 3.46,-3.933 c 2.616773,2.9021789 4.066598,6.6702984 4.07,10.578 -0.0063,3.900175 -1.44181,7.662795 -4.035,10.576 L 18.23,21.915 C 20.657796,19.178038 21.998948,15.646573 22,11.988 22.000629,8.3245527 20.647261,4.7901258 18.2,2.064 Z"
+                            fill="#000" />
+                    </svg>
+                    <svg hidden width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M 11.193,4.452 5.67,9 H 2.376 C 1.6160562,9 1,9.6160562 1,10.376 v 3.248 C 1,14.383944 1.6160562,15 2.376,15 h 3.293 l 5.524,4.548 c 0.33726,0.241599 0.806514,8.66e-4 0.807,-0.414 V 4.866 C 11.999514,4.4511335 11.53026,4.2104008 11.193,4.452 Z M 18.707,12 21.354,14.646 20.646,15.354 18,12.707 15.354,15.354 14.646,14.646 17.293,12 14.646,9.354 15.354,8.646 18,11.293 20.646,8.646 21.354,9.354 Z"
+                            fill="#000"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="equalizer-wrapper">
+                <div class="equalizer-panel">
+                    <div class="top">
+
+                    </div>
+                    <div class="sliders">
+                        <input type="range" class="vertical-slider" min="0" max="1" step="0.01" value="0.5">
+                        <input type="range" class="vertical-slider" min="0" max="1" step="0.01" value="0.5">
+                        <input type="range" class="vertical-slider" min="0" max="1" step="0.01" value="0.5">
+                        <input type="range" class="vertical-slider" min="0" max="1" step="0.01" value="0.5">
+                    </div>
+                </div>
+                <button id="equalizer-btn" style="width: 26px; height: 26px;">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_iconCarrier">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M15 8.25V9L13.5 9V6H15V6.75L19.5 6.75V8.25L15 8.25ZM9 13.5L9 10.5L7.5 10.5L7.5 11.25L4.5 11.25V12.75L7.5 12.75L7.5 13.5H9ZM17.25 15V15.75H19.5V17.25H17.25V18H15.75V15H17.25ZM4.5 15.75V17.25H15V15.75H4.5ZM9.75 11.25L19.5 11.25V12.75L9.75 12.75V11.25ZM4.5 6.75H12.75V8.25H4.5V6.75Z"
+                                fill="#000"></path>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+            <button id="like-btn" style="width: 22px; height: 22px;">
+                <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M7.66003 10.1022L11.76 4.00221C12.16 3.40221 13.16 3.00221 13.96 3.30221C14.86 3.60221 15.46 4.60221 15.26 5.50221L14.76 8.70221C14.66 9.40221 15.16 9.90221 15.76 9.90221H19.76C21.26 9.90221 22.1801 11.0522 21.66 12.5022C21.14 13.9522 20.6801 16.5522 19.26 18.8022C18.6102 19.8318 17.8975 20.5522 16.6801 20.5522C12.6801 20.5522 6.66003 20.5522 6.66003 20.5522"
+                        stroke="#000"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10" />
+                    <path
+                        d="M2.18005 10.5522C2.18005 9.99996 2.62777 9.55225 3.18005 9.55225H6.68005C7.23234 9.55225 7.68005 9.99996 7.68005 10.5522V20.5522H3.18005C2.62777 20.5522 2.18005 20.1045 2.18005 19.5522V10.5522Z"
+                        stroke="#000"
+                        stroke-width="1.5" />
+                </svg>
+            </button>
+            <button id="dislike-btn" style="width: 22px; height: 22px;">
+                <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="vector" d="M16.34 13.8978L12.24 19.9978C11.84 20.5978 10.84 20.9978 10.04 20.6978C9.14 20.3978 8.54 19.3978 8.74 18.4978L9.24 15.2978C9.34 14.5978 8.84 14.0978 8.24 14.0978H4.24C2.74 14.0978 1.8199 12.9478 2.34 11.4978C2.86 10.0478 3.3199 7.44784 4.74 5.19784C5.3898 4.16823 6.1025 3.44784 7.31986 3.44784C11.3199 3.44784 17.34 3.44784 17.34 3.44784"
+                    stroke="#000" stroke-width="1.5" stroke-miterlimit="10"/>
+                    <path id="rec" d="M21.82 13.4478C21.82 14 21.3722 14.4478 20.82 14.4478H17.32C16.7677 14.4478 16.32 14 16.32 13.4478V3.44784H20.82C21.3722 3.44784 21.82 3.89555 21.82 4.44784V13.4478Z"
+                    stroke="#000" stroke-width="1.5"/>
+                </svg>
+            </button>
+            <button id="add-to-playlist-btn" class="orange-hover" style="width: 28px; height: 28px;">
+                <svg width="100%" height="100%" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"
+                    fill="#000">
+                    <path d="M450-450H220v-60h230v-230h60v230h230v60H510v230h-60v-230Z" />
+                </svg>
+            </button>
+            <a href="/api/mp3/download/id" download="song name.mp3" id="download" class="orange-hover" style="width: 22px; height: 22px;">
+                <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="m 12.666918,0 v 16.392001 l 3.530664,-3.529334 0.943022,0.942667 -5.13927,5.138666 -5.1406042,-5.138666 0.9430221,-0.942667 3.5293301,3.526667 V 0 Z M 3.330066,24 H 20.669934 V 22.666667 H 3.330066 Z"
+                        stroke-width="1.33358" fill="#000" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</footer>

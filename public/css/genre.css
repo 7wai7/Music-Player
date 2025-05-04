@@ -1,0 +1,17 @@
+.genres-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.genre-btn {
+    padding: 12px;
+    background: rgb(229, 229, 229);
+    border: 2px solid lightgrey;
+    border-radius: 12px;
+}
+
+.genre-btn:hover {
+    background: orange;
+}

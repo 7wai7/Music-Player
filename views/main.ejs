@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        (function() {
+            if (/Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)) {
+                document.documentElement.classList.add("mobile-device");
+            }
+        })();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="/css/global.css">
+
+    <!-- Додаткові стилі (перезаписуються на кожній сторінці) -->
+    <% stylesheets.forEach(function(style) { %>
+        <link rel="stylesheet" href="/css/<%= style %>.css">
+    <% }) %>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("./partials/header") %>
+    
+    <div class="info">
+        <div id="main">
+            <%- include(main) %>
+        </div>
+        <%- include("./partials/sidebar") %>
+    </div>
+
+    <%- include("./partials/footer") %>
+
+    <script src="/js/global.js"></script>
+
+    <!-- Додаткові скрипти (перезаписуються на кожній сторінці) -->
+    <% scripts.forEach(function(script) { %>
+        <script src="/js/<%= script %>.js"></script>
+    <% }) %>
+
+</body>
+
+</html>

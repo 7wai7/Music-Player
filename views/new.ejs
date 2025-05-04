@@ -1,0 +1,19 @@
+<h2 class="page-block-top">Новинки</h2>
+<hr>
+<div class="page-block">
+    <div id="songs-container" class="songs-container">
+        <% for (let i = 0; i < 20; i++) { %>
+            <%- include("./partials/song") %>
+        <% } %>
+    </div>
+</div>
+<hr>
+<div class="comments">
+    <div class="comments-top">Коментарі</div>
+    <%- include("./partials/add comment") %>
+    <div id="comments-content">
+        <% for (let i = 0; i < 20; i++) { %>
+            <%- include("./partials/comment") %>
+        <% } %>
+    </div>
+</div>

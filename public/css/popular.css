@@ -1,0 +1,11 @@
+.sorting-btns {
+    margin-bottom: 20px;
+}
+
+.sorting-btn {
+    font-size: 16px;
+}
+
+.sorting-btn:hover {
+    color: orange;
+}

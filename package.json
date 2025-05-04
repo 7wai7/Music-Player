@@ -1,0 +1,30 @@
+{
+  "name": "music-player",
+  "version": "1.0.0",
+  "description": "Music Player is a web-based platform for listening to, downloading and sharing music. Users can search for tracks, create accounts, upload their own music, and view listening and popularity statistics. Built on Node.js with pure JS, HTML and CSS.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .\\src\\index.js",
+    "dev": "nodemon .\\src\\index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.1",
+    "music-player": "file:",
+    "path": "^0.12.7",
+    "url": "^0.11.4"
+  }
+}

@@ -1,0 +1,9 @@
+.page-block-top {
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.artists-bar {
+    overflow: auto;
+    overflow-y: hidden;
+}

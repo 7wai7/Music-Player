@@ -1,0 +1,41 @@
+<div class="page-block">
+    <h3 class="page-block-top">
+        <a href="/artists">Виконавці</a>
+    </h3>
+    <div class="artists-bar">
+        <div id="artists-container">
+            <% for (let i = 0; i < 5; i++) { %>
+                <a href="/artist/id" class="artist">
+                    <div class="img-wrapper">
+                        <img src="/api/avatar/id">
+                    </div>
+                    <span class="name">Ім'я</span>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="page-block">
+    <h3 class="page-block-top">
+        <a href="/popular">Популярна музика</a>
+    </h3>
+    <div id="songs-container" class="songs-container">
+        <% for (let i = 0; i < 10; i++) { %>
+            <%- include("./partials/song") %>
+        <% } %>
+    </div>
+    <div class="pages-btns">
+        <button></button>
+    </div>
+</div>
+<hr>
+<div class="comments">
+    <div class="comments-top">Коментарі</div>
+    <%- include("./partials/add comment") %>
+    <div id="comments-content">
+        <% for (let i = 0; i < 20; i++) { %>
+            <%- include("./partials/comment") %>
+        <% } %>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.title {
+    margin-bottom: 30px;
+}
+
+.title .song-artist {
+    font-size: 20px;
+    font-weight: 600;
+    color: orange;
+}
+
+.title .song-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.song-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.page-block-top {
+    padding: 0;
+    margin-bottom: 20px;
+}

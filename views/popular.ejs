@@ -1,0 +1,42 @@
+<h2 class="page-block-top">Популярна музика</h2>
+<hr>
+<div class="page-block">
+    <div class="sorting-btns dropdown">
+        <button class="sorting-btn">
+            <span>Сортувати</span>
+            <svg width="12px" height="12px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+
+                <g id="layer1" transform="rotate(45 1254.793 524.438)">
+                    <path
+                        style="fill:#373737;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                        d="M11.532 1048.341H9.536v-9h-9v-2h11z" id="path4179" />
+                </g>
+            </svg>
+        </button>
+        <div class="content">
+            <div class="content-block">
+                <button class="likes-btn">ЛАЙКИ</button>
+                <button class="listening-btn">ПРОСЛУХОВУВАННЯ</button>
+            </div>
+            <hr>
+            <div class="content-block">
+
+            </div>
+        </div>
+    </div>
+    <div id="songs-container" class="songs-container">
+        <% for (let i = 0; i < 10; i++) { %>
+            <%- include("./partials/song") %>
+        <% } %>
+    </div>
+</div>
+<hr>
+<div class="comments">
+    <div class="comments-top">Коментарі</div>
+    <%- include("./partials/add comment") %>
+    <div id="comments-content">
+        <% for (let i = 0; i < 20; i++) { %>
+            <%- include("./partials/comment") %>
+        <% } %>
+    </div>
+</div>

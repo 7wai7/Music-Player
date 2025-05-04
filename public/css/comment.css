@@ -1,0 +1,21 @@
+.comment {
+    border: 2px solid lightgray;
+    border-radius: 12px;
+    font-size: 14px;
+    color: gray;
+    padding: 10px;
+}
+
+.comment .row {
+    gap: 20px;
+    margin-bottom: 10px;
+    align-items: end;
+}
+
+.comment .login {
+    font-weight: 600;
+}
+
+.comment .msg {
+    text-align: justify;
+}

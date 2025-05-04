@@ -1,0 +1,22 @@
+<h2 class="page-block-top">Жанри</h2>
+<hr>
+<div class="page-block">
+    <div class="genres-grid">
+        <% const genres = ['pop', 'k-pop', 'j-pop', 'club', 'chanson', 'rock', 'dance', 'metal', 'heavy metal', 'alternative', 'electro', 'instrumental', 'techno', 'phonk'] %>
+        <% for (let i = 0; i < genres.length; i++) { %>
+            <% const genre = genres[i]; %>
+
+            <button class="genre-btn"><%= genre %></button>
+        <% } %>
+    </div>
+</div>
+<hr>
+<div class="comments">
+    <div class="comments-top">Коментарі</div>
+    <%- include("./partials/add comment") %>
+    <div id="comments-content">
+        <% for (let i = 0; i < 20; i++) { %>
+            <%- include("./partials/comment") %>
+        <% } %>
+    </div>
+</div>

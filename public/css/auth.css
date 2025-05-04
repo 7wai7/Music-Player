@@ -1,0 +1,40 @@
+.auth-block {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
+
+.auth-block #title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.auth-block input {
+    border: 2px solid lightgray;
+    border-radius: 20px;
+    padding: 8px 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+#submit-btn {
+    border-radius: 50px;
+}
+
+#submit-btn {
+    background: #000;
+    color: #fff;
+    padding: 8px 10px;
+    margin-bottom: 20px;
+}
+
+#submit-btn:hover {
+    background: orange;
+    color: #000;
+}
+
+#signup-btn:hover {
+    color: orange;
+}
