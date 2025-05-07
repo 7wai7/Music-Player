@@ -10,6 +10,8 @@
     background: rgb(229, 229, 229);
     border: 2px solid lightgrey;
     border-radius: 12px;
+    font-size: 14px;
+    text-align: center;
 }
 
 .genre-btn:hover {

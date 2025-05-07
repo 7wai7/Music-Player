@@ -98,12 +98,12 @@
     gap: 5px;
 }
 
-.song .like-btn .active path,
+.song .like-btn.active path,
 .song .like-btn:hover path {
     stroke: lightgreen;
 }
 
-.song .dislike-btn .active path,
+.song .dislike-btn.active path,
 .song .dislike-btn:hover path {
     stroke: red;
 }

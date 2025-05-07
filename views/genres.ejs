@@ -6,7 +6,7 @@
         <% for (let i = 0; i < genres.length; i++) { %>
             <% const genre = genres[i]; %>
 
-            <button class="genre-btn"><%= genre %></button>
+            <a isLink href="/genres/<%= genre %>" class="genre-btn"><%= genre %></a>
         <% } %>
     </div>
 </div>
@@ -22,4 +22,4 @@
 </div>
 
 
-<link rel="stylesheet" href="/css/genre.css">
+<link rel="stylesheet" href="/css/genres.css">

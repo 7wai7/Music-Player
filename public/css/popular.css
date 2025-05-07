@@ -9,3 +9,29 @@
 .sorting-btn:hover {
     color: orange;
 }
+
+
+
+.sort-panel {
+    margin-bottom: 20px;
+}
+
+.song-sort {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.song-sort:hover {
+    border-color: #999;
+    background-color: #fff;
+}
+
+.song-sort:focus {
+    outline: none;
+    border-color: #007BFF;
+}

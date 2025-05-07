@@ -12,9 +12,15 @@ function formatTime(seconds) {
     return `${minutes}:${secs.toString().padStart(2, '0')}`;
 }
 
+function bytesToMb(bytes) {
+    return (bytes / (1024 * 1024)).toFixed(2); // повертає рядок типу "1.23"
+}
+
+
 export default {
     formatDistanceToNow,
     uk,
     timeAgo,
-    formatTime
+    formatTime,
+    bytesToMb
 }

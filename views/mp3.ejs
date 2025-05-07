@@ -1,20 +1,22 @@
 <div class="page-block">
-    <span class="title"><a href="/artist/id" class="song-artist">Виконавець</a> - <span class="song-name">Назва</span></span>
+    <span class="title"><a isLink href="/artist/id" class="song-artist"><%= song.user.login %></a> - <span class="song-name"><%= song.title %></span></span>
 
     <div class="song-info">
-        <span>Дата додавання: Дата</span>
-        <span>Дата створення: Дата</span>
-        <span>Розмір: 0 Mb</span>
-        <span>Тривалість: 00:00</span>
-        <span>Прослуховування: 0</span>
+        <span>Дата додавання: <%= new Date(song.createDate).toLocaleDateString('uk-UA') %></span>
+        <span>Дата створення: <%= new Date(song.createdAt).toLocaleDateString('uk-UA') %></span>
+        <span>Розмір: <%= bytesToMb(song.size) %> Mb</span>
+        <span>Тривалість: <%= formatTime(song.duration) %></span>
+        <span>Прослуховування: <%= song.auditioning %></span>
     </div>
 </div>
 <hr>
 <div class="page-block">
     <h3 class="page-block-top">Популярна музика автора</h3>
     <div id="songs-container" class="songs-container">
-        <% for (let i = 0; i < 6; i++) { %>
-            <%- include("./partials/song") %>
+        <% for (let i = 0; i < music.length; i++) { %>
+            <% const song = music[i] %>
+
+            <%- include("./partials/song", { song }) %>
         <% } %>
     </div>
 </div>
@@ -31,3 +33,6 @@
 
 
 <link rel="stylesheet" href="/css/mp3.css">
+<script>
+    window.musicList = '<%- JSON.stringify(music) %>';
+</script>

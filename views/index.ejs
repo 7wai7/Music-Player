@@ -1,13 +1,13 @@
 <div class="page-block">
     <h3 class="page-block-top">
-        <a href="/artists">Виконавці</a>
+        <a isLink href="/artists">Виконавці</a>
     </h3>
     <div class="artists-bar">
         <div id="artists-container">
             <% for (let i = 0; i < artists.length; i++) { %>
                 <% const artist = artists[i] %>
 
-                <a href="/artist/<%= artist._id %>" class="artist">
+                <a isLink href="/artist/<%= artist._id %>" class="artist">
                     <div class="img-wrapper">
                         <img src="/api/avatar/<%= artist._id %>">
                     </div>
@@ -20,7 +20,7 @@
 <hr>
 <div class="page-block">
     <h3 class="page-block-top">
-        <a href="/popular">Популярна музика</a>
+        <a isLink href="/popular">Популярна музика</a>
     </h3>
     <div id="songs-container" class="songs-container">
         <% for (let i = 0; i < music.length; i++) { %>

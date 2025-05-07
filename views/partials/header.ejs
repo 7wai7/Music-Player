@@ -1,5 +1,5 @@
 <header>
-    <a href="/" id="logo" class="logo">
+    <a isLink href="/" id="logo" class="logo">
         <h1>Soundupe</h1>
     </a>
 
@@ -20,11 +20,11 @@
 
     <div class="auth-btns">
         <% if(user) { %>
-            <a href="/profile" class="auth-btn">
+            <a isLink href="/profile" class="auth-btn">
                 <span><%= user.login %></span>
             </a>
         <% } else { %>
-            <a href="/auth" id="auth-btn" class="auth-btn login-btn">
+            <a isLink href="/auth" id="auth-btn" class="auth-btn login-btn">
                 <span>Увійти в акаунт</span>
             </a>
         <% } %>

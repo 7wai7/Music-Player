@@ -27,10 +27,10 @@
 <div class="page-block">
     <div class="sorting-btns row">
         <div class="btn-wrapper <%= sort === 'likes' ? 'active' : '' %>">
-            <a id="sorting-popular-btn" href="/artist/<%= artist._id %>">ПОПУЛЯРНА</a>
+            <a isLink id="sorting-popular-btn" href="/artist/<%= artist._id %>">ПОПУЛЯРНА</a>
         </div>
         <div class="btn-wrapper <%= sort === 'createdAt' ? 'active' : '' %>">
-            <a id="sorting-new-btn" href="/artist/<%= artist._id %>?sort=createdAt">НОВА</a>
+            <a isLink id="sorting-new-btn" href="/artist/<%= artist._id %>?sort=createdAt">НОВА</a>
         </div>
     </div>
     <div id="songs-container" class="songs-container">

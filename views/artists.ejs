@@ -2,12 +2,14 @@
 <hr>
 <div class="page-block">
     <div id="artists-container">
-        <% for (let i = 0; i < 20; i++) { %>
-            <a href="/artist/id" class="artist">
+        <% for (let i = 0; i < artists.length; i++) { %>
+            <% const artist = artists[i] %>
+
+            <a isLink href="/artist/<%= artist._id %>" class="artist">
                 <div class="img-wrapper">
-                    <img src="/api/avatar/id">
+                    <img src="/api/avatar/<%= artist._id %>">
                 </div>
-                <span class="name">Ім'я</span>
+                <span class="name"><%= artist.login %></span>
             </a>
         <% } %>
     </div>

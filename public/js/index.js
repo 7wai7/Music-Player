@@ -2,6 +2,7 @@ const pageControllers = {
     '/auth': initAuthPage,
     '/upload-song': initUploadSongPage,
     '/artist': initArtistPage,
+    '/popular': initPopularPage
 };
 
 function matchRoute(url) {
@@ -172,6 +173,37 @@ function updateMetadataUI() {
 }
 
 
+async function setReactionAtSong(songId, value, element) {
+    try {
+        const res = await fetch(`/api/reaction/${songId}/${value}`, { method: "PUT"})
+
+        const data = await res.json();
+        console.log(data);
+        if(res.ok) {
+            if(element) {
+                element.querySelector('.likes .count').textContent = data.reactionCounts.likes;
+                element.querySelector('.dislikes .count').textContent = data.reactionCounts.dislikes;
+
+                const likeBtn = element.querySelector('.like-btn');
+                const dislikeBtn = element.querySelector('.dislike-btn');
+
+                if(likeBtn.dataset.value === value) {
+                    likeBtn.classList.add('active');
+                    dislikeBtn.classList.remove('active');
+                }
+                if(dislikeBtn.dataset.value === value) {
+                    likeBtn.classList.remove('active');
+                    dislikeBtn.classList.add('active');
+                }
+            }
+        }
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     loadPage(window.location.pathname);
@@ -270,9 +302,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         function handleLinkClick(event) {
-            const element = event.target.closest('a');
+            const element = event.target.closest('a[isLink]');
 
-            if (element && element.matches('a')) {
+            if (element) {
                 event.preventDefault();
                 const url = element.getAttribute('href');
                 history.pushState(null, '', url);
@@ -298,6 +330,26 @@ document.addEventListener("DOMContentLoaded", () => {
             if(addSongToPlaylistBtn) {
                 const song = addSongToPlaylistBtn.closest('.song');
                 addSongToPlaylist(song.dataset.id);
+            }
+
+            const likeSongBtn = event.target.closest('.like-btn');
+            if(likeSongBtn) {
+                const song = likeSongBtn.closest('.song');
+                const id = song.dataset.id;
+                const value = likeSongBtn.dataset.value;
+                const element = likeSongBtn.closest('.actions');
+
+                setReactionAtSong(id, value, element);
+            }
+
+            const dislikeSongBtn = event.target.closest('.dislike-btn');
+            if(dislikeSongBtn) {
+                const song = dislikeSongBtn.closest('.song');
+                const id = song.dataset.id;
+                const value = dislikeSongBtn.dataset.value;
+                const element = dislikeSongBtn.closest('.actions');
+
+                setReactionAtSong(id, value, element);
             }
 
         });

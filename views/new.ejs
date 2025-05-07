@@ -2,8 +2,10 @@
 <hr>
 <div class="page-block">
     <div id="songs-container" class="songs-container">
-        <% for (let i = 0; i < 20; i++) { %>
-            <%- include("./partials/song") %>
+        <% for (let i = 0; i < music.length; i++) { %>
+            <% const song = music[i]; %>
+
+            <%- include("./partials/song", { song }) %>
         <% } %>
     </div>
 </div>
@@ -20,3 +22,6 @@
 
 
 <link rel="stylesheet" href="/css/new.css">
+<script>
+    window.musicList = '<%- JSON.stringify(music) %>';
+</script>

@@ -27,6 +27,7 @@ const app = express();
 app.use((req, res, next) => {
     res.locals.timeAgo = functions.timeAgo;
     res.locals.formatTime = functions.formatTime;
+    res.locals.bytesToMb = functions.bytesToMb;
     next();
 });
 

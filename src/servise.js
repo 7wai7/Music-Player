@@ -6,60 +6,139 @@ import Song from "./models/Song.js";
 const ObjectId = mongoose.Types.ObjectId;
 
 
-export const findUserMusic = async (id, sort) => {
+export const findUserMusic = async (user, id, sort, limit = 20) => {
     const music = await Song.aggregate([
         {
             $match: { user: new ObjectId(id) }
         },
-        {
-            $lookup: {
-                from: 'users',
-                localField: 'user',
-                foreignField: '_id',
-                as: 'user'
-            }
-        },
-        {
-            $unwind: '$user'
-        },
-        {
-            $lookup: {
-                from: "reactions",
-                localField: "_id",
-                foreignField: "video",
-                as: "reactions"
-            }
-        },
-        {
-            $addFields: {
-                likes: {
-                    $size: {
-                        $filter: { input: "$reactions", as: "r", cond: { $eq: ["$$r.reaction", true] } }
-                    }
-                },
-                dislikes: {
-                    $size: {
-                        $filter: { input: "$reactions", as: "r", cond: { $eq: ["$$r.reaction", false] } }
-                    }
-                }
-            }
-        },
+        ...enrichSongAggregation(user?._id),
         { $sort: { [sort]: -1 } },
-        { $limit: 20 }
+        { $limit: limit }
     ]);
-
-    console.log(music);
-    
 
     return music;
 }
 
-export const findTrends = async () => {
+
+export const findPopularMusic = async (user, sort) => {
+    switch (sort) {
+        case 'likes':
+            return await findMusicByLikes(user);
+
+        case '2025':
+        case '2024':
+        case '2023':
+        case '2022':
+        case '2021':
+        case '2020':
+        case '2010':
+        case '2000':
+            return await findMusicByYear(user, sort);
+
+        case '2010-2019':
+        case '2000-2009':
+        case '1990-1999':
+        case '1980-1989':
+            return await findEarlierMusic(user, 1980);
+
+        case 'earlier':
+            return await findMusicByYearPeriod(user, sort);
+            
+        default:
+            return await findTrends(user);
+
+    }
+}
+
+
+export const findEarlierMusic = async (user, value) => {
+    const music = await Song.aggregate([
+        {
+            $addFields: {
+                year: { $year: "$createDate" }
+            }
+        },
+        {
+            $match: {
+                $expr: {
+                    $lt: ["$year", value]
+                }
+            }
+        },
+        ...enrichSongAggregation(user?._id),
+        { $sort: { createDate: -1 } },
+        { $limit: 20 }
+    ])
+
+    return music;
+}
+
+export const findMusicByYearPeriod = async (user, years) => {
+    const yearsArr = years.split('-');
+    const firstYear = parseInt(yearsArr[0], 10);
+    const lastYear = parseInt(yearsArr[1], 10);
+
+    const music = await Song.aggregate([
+        {
+            $addFields: {
+                year: { $year: "$createDate" }
+            }
+        },
+        {
+            $match: {
+                $expr: {
+                    $and: [
+                        { $gte: ["$year", firstYear] },
+                        { $lt: ["$year", lastYear] }
+                    ]
+                }
+            }
+        },
+        ...enrichSongAggregation(user?._id),
+        { $sort: { createDate: -1 } },
+        { $limit: 20 }
+    ])
+
+    return music;
+}
+
+export const findMusicByYear = async (user, year) => {
+    const music = await Song.aggregate([
+        {
+            $addFields: {
+                year: { $year: "$createDate" }
+            }
+        },
+        {
+            $match: {
+                year: parseInt(year, 10)
+            }
+        },
+        ...enrichSongAggregation(user?._id),
+        { $sort: { createDate: -1 } },
+        { $limit: 20 }
+    ])
+
+    return music;
+}
+
+
+export const findMusicByLikes = async (user) => {
+    const music = await Song.aggregate([
+        ...enrichSongAggregation(user?._id),
+        { $sort: { likes: -1 } },
+        { $limit: 20 }
+    ])
+
+    return music;
+}
+
+export const findTrends = async (user) => {
     const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
     const stats = await Play.aggregate([
         {
-            $match: { createdAt: { $gte: sevenDaysAgo } }
+            $match: { createdAt: { $gte: sevenDaysAgo } } // тренди розраховуються за тим, коли була прослухана пісня
         },
         {
             $group: {
@@ -87,42 +166,24 @@ export const findTrends = async () => {
         {
             $replaceRoot: { newRoot: '$song' }
         },
-        {
-            $lookup: {
-                from: 'users',
-                localField: 'user',
-                foreignField: '_id',
-                as: 'user'
-            }
-        },
-        {
-            $unwind: '$user'
-        },
-        {
-            $lookup: {
-                from: "reactions",
-                localField: "_id",
-                foreignField: "video",
-                as: "reactions"
-            }
-        },
-        {
-            $addFields: {
-                likes: {
-                    $size: {
-                        $filter: { input: "$reactions", as: "r", cond: { $eq: ["$$r.reaction", true] } }
-                    }
-                },
-                dislikes: {
-                    $size: {
-                        $filter: { input: "$reactions", as: "r", cond: { $eq: ["$$r.reaction", false] } }
-                    }
-                }
-            }
-        },
+        ...enrichSongAggregation(user?._id)
     ])
 
     return stats;
+}
+
+export const findNew = async (user) => {
+    const music = await Song.aggregate([
+        ...enrichSongAggregation(user?._id),
+        {
+            $sort: { createdAt: -1 }
+        },
+        {
+            $limit: 20
+        }
+    ])
+
+    return music;
 }
 
 export const findPopularArtists = async () => {
@@ -186,7 +247,60 @@ export const calculateRating = ratings => {
         const rate = ratings[i];
         rating += rate.value;
     }
-    if(rating > 0) rating /= ratings.length;
+    if (rating > 0) rating /= ratings.length;
 
     return rating;
-} 
+}
+
+
+
+function enrichSongAggregation(userId) {
+    return [
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'user',
+                foreignField: '_id',
+                as: 'user'
+            }
+        },
+        {
+            $unwind: '$user'
+        },
+        {
+            $lookup: {
+                from: "reactions",
+                localField: "_id",
+                foreignField: "song",
+                as: "reactions"
+            }
+        },
+        {
+            $addFields: {
+                likes: {
+                    $size: {
+                        $filter: { input: "$reactions", as: "r", cond: { $eq: ["$$r.reaction", true] } }
+                    }
+                },
+                dislikes: {
+                    $size: {
+                        $filter: { input: "$reactions", as: "r", cond: { $eq: ["$$r.reaction", false] } }
+                    }
+                },
+                // Додаємо поле "userReaction" (чи лайкнув / дизлайкнув користувач)
+                userReaction: {
+                    $arrayElemAt: [
+                        {
+                            $filter: {
+                                input: "$reactions",
+                                as: "r",
+                                cond: { $eq: ["$$r.user", new ObjectId(userId)] }
+                            }
+                        },
+                        0
+                    ]
+                }
+            }
+        }
+    ]
+}
