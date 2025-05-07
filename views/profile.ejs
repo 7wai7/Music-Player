@@ -1,0 +1,27 @@
+<div class="page-block profile-info">
+    <img src="/api/avatar/id" class="avatar">
+    <div class="metadata">
+        <h2 class="login"><%= user.login %></h2>
+        <span class="email"><%= user.email %></span>
+        <a href="/upload-song" class="upload-song-btn">
+            <span>Завантажити пісню</span>
+        </a>
+    </div>
+</div>
+<hr>
+<div class="page-block">
+    <h2 class="page-block-top">Моя музика</h2>
+    <div id="songs-container" class="songs-container">
+        <% for (let i = 0; i < music.length; i++) { %>
+            <% const song = music[i]; %>
+
+            <%- include("./partials/song", { song }) %>
+        <% } %>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="/css/profile.css">
+<script>
+    window.musicList = '<%- JSON.stringify(music) %>';
+</script>

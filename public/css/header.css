@@ -32,6 +32,7 @@ header {
     flex-direction: row;
     overflow: hidden;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .search-div input {

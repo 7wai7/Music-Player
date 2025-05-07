@@ -1,0 +1,38 @@
+.profile-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-info .avatar {
+    width: 200px;
+    height: 200px;
+    margin-right: 30px;
+}
+
+.profile-info .metadata {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-info .email {
+    color: #3e6594;
+}
+
+.upload-song-btn {
+    padding: 8px 10px;
+    box-sizing: border-box;
+    border: 2px solid lightgrey;
+    border-radius: 50px;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+.upload-song-btn:hover {
+    background: orange;
+}
+
+.page-block-top {
+    padding: 0;
+    margin-bottom: 20px;
+}

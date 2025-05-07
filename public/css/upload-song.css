@@ -1,0 +1,127 @@
+#main {
+    width: 100%;
+}
+
+.sidebar {
+    display: none;
+}
+
+.page-block {
+    height: 100%;
+    position: relative;
+}
+
+
+.upload-song-drop-zone {
+    display: flex;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.upload-song-drop-zone.dragover {
+    background: lightgray;
+}
+
+.select-song-btn {
+    margin: auto;
+    padding: 12px 14px;
+    border: 2px solid lightgray;
+    border-radius: 50px;
+}
+
+.select-song-btn:hover {
+    background: orange;
+}
+
+.uploaded-song-block {
+    display: flex;
+    flex-direction: row;
+    gap: 10rem;
+    font-family: sans-serif;
+}
+
+/* Ліва частина */
+.uploaded-song-block .form-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.uploaded-song-block label {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.uploaded-song-block input,
+.uploaded-song-block textarea,
+.uploaded-song-block select {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.uploaded-song-block input.error {
+    border-color: red;
+}
+
+/* Права частина */
+.uploaded-song-block .form-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.uploaded-song-block audio {
+    width: 100%;
+}
+
+.uploaded-song-block .upload-song-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+
+.uploaded-song-block .upload-song-btn[notAvailable] {
+    background: lightgrey;
+}
+
+.uploaded-song-block .upload-song-btn:hover {
+    background-color: #3d9b42;
+}
+
+.uploaded-song-block .upload-song-btn[notAvailable]:hover {
+    background: lightgrey;
+}
+
+
+.file-uploading-modal {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-uploading-modal .modal-panel {
+    margin: auto;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file-uploading-modal .uploading {
+    margin-bottom: 30px;
+}
+
+.file-uploading-modal .upload-progress-bar {
+    width: 100%;
+}

@@ -8,7 +8,8 @@ footer {
     box-sizing: border-box;
 }
 
-.orange-hover .active,
+.orange-hover.active svg,
+.orange-hover.active path,
 .orange-hover:hover svg,
 .orange-hover:hover path,
 .orange-hover:hover g {

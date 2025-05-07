@@ -1,0 +1,71 @@
+<div class="page-block">
+    <div id="upload-song-drop-zone" class="upload-song-drop-zone">
+        <button id="select-song-btn" class="select-song-btn">
+            <h2>Завантажити</h2>
+        </button>
+        <input type="file" id="song-file-input" accept="audio/mpeg" hidden />
+    </div>
+    <div id="uploaded-song-block" class="uploaded-song-block" hidden>
+        <!-- Ліва частина -->
+        <div class="form-left">
+            <div>
+                <label for="song-title">Назва пісні *</label>
+                <input type="text" id="song-title" required />
+            </div>
+
+            <div>
+                <label for="song-lyrics">Слова пісні</label>
+                <textarea id="song-lyrics" class="textarea-autosize" maxlength="5000"></textarea>
+            </div>
+
+            <div>
+                <label for="song-date">Дата написання</label>
+                <input type="date" id="song-date" />
+            </div>
+
+            <div>
+                <label for="song-genre">Жанр</label>
+                <select id="song-genre">
+                    <option value="">Оберіть жанр</option>
+                    <option value="pop">Поп</option>
+                    <option value="k-pop">k-поп</option>
+                    <option value="j-pop">j-поп</option>
+                    <option value="club">Клубна</option>
+                    <option value="chanson">Шансон</option>
+                    <option value="classic">Класика</option>
+                    <option value="rock">Рок</option>
+                    <option value="dance">Танцювальна</option>
+                    <option value="metal">Метал</option>
+                    <option value="heavy metal">Важкий метал</option>
+                    <option value="alternative">Альтернатива</option>
+                    <option value="electro">Електроніка</option>
+                    <option value="instrumental">Інструментальна</option>
+                    <option value="techno">Техно</option>
+                    <option value="phonk">Фонк</option>
+                    <option value="other">Інше</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Права частина -->
+        <div class="form-right">
+            <audio id="audio-preview" controls>
+                <source src="/path-to-audio.mp3" type="audio/mpeg" />
+                Ваш браузер не підтримує аудіо.
+            </audio>
+
+            <button id="upload-song-btn" class="upload-song-btn">
+                <span>Завантажити</span>
+            </button>
+        </div>
+    </div>
+    <div id="file-uploading-modal" class="file-uploading-modal" hidden>
+        <div class="modal-panel">
+            <h2 class="uploading">Завантаження</h2>
+            <progress id="upload-progress-bar" class="upload-progress-bar" max="100" value="0"></progress>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="/css/upload-song.css">

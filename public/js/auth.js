@@ -1,6 +1,5 @@
-
-document.addEventListener("DOMContentLoaded", () => {
-  
+function initAuthPage() {
+    
     try {
         const form = document.getElementById('auth-form');
         const formTitle = document.getElementById('title');
@@ -99,4 +98,4 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error(err);
     }
 
-});
+}

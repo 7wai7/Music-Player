@@ -8,8 +8,9 @@ import { dirname } from 'path';
 
 import functions from './functions.js';
 import apiRouter from './routers/api.js';
-import pageRoutes from './routers/pages.js';
+import pagesRouter from './routers/pages.js';
 import authRoutes from './routers/auth.js';
+import auth from './middlewares/auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -37,19 +38,24 @@ app.use(cookieParser());
 // Налаштування EJS
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../', 'views'));
 
 
-app.use('/music', express.static(path.join(__dirname, 'uploads')));
+app.use('/music', express.static(path.join(__dirname, '../', 'data', 'uploads', 'songs')));
 
 // Маршрути
 app.use("/api", apiRouter);
+app.use("/api/pages", pagesRouter);
 app.use("/api/auth", authRoutes);
-app.use("/", pageRoutes);
 
-app.use((err, req, res, next) => {
-    res.status(err.status || 500).json({ message: err.message });
+app.use(auth, (req, res) => {
+    console.log('app');
+    
+    res.render("main", {
+        user: req.user,
+    });
 });
+
 
 async function startApp() {
     try {

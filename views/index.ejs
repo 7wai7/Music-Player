@@ -4,12 +4,14 @@
     </h3>
     <div class="artists-bar">
         <div id="artists-container">
-            <% for (let i = 0; i < 5; i++) { %>
-                <a href="/artist/id" class="artist">
+            <% for (let i = 0; i < artists.length; i++) { %>
+                <% const artist = artists[i] %>
+
+                <a href="/artist/<%= artist._id %>" class="artist">
                     <div class="img-wrapper">
-                        <img src="/api/avatar/id">
+                        <img src="/api/avatar/<%= artist._id %>">
                     </div>
-                    <span class="name">Ім'я</span>
+                    <span class="name"><%= artist.login %></span>
                 </a>
             <% } %>
         </div>
@@ -21,8 +23,10 @@
         <a href="/popular">Популярна музика</a>
     </h3>
     <div id="songs-container" class="songs-container">
-        <% for (let i = 0; i < 10; i++) { %>
-            <%- include("./partials/song") %>
+        <% for (let i = 0; i < music.length; i++) { %>
+            <% const song = music[i] %>
+
+            <%- include("./partials/song", { song }) %>
         <% } %>
     </div>
     <div class="pages-btns">
@@ -39,3 +43,9 @@
         <% } %>
     </div>
 </div>
+
+
+<link rel="stylesheet" href="/css/index.css">
+<script>
+    window.musicList = '<%- JSON.stringify(music) %>';
+</script>

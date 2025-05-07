@@ -1,19 +1,32 @@
 import Router from "express";
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 import auth from '../middlewares/auth.js';
 import { User } from '../models/User.js';
+import Song from '../models/Song.js';
+import { calculateRating, findPopularArtists, findTrends, findUserMusic } from "../servise.js";
+import mongoose from 'mongoose';
+import ArtistRating from "../models/ArtistRating.js";
+const ObjectId = mongoose.Types.ObjectId;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const router = new Router();
 
-router.get("/", auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
+    console.log('index');
+    
     try {
-        res.render("main", {
-            main: "./index",
-            stylesheets: ['index', 'header', 'footer', 'sidebar', 'song', 'comment'],
-            scripts: ['index'],
-            title: "Soundupe",
+        const music = await findTrends();
+        const artists = await findPopularArtists();
+
+        res.render("index", {
             user: req.user,
+            artists,
+            music
         })
     } catch (err) {
         console.error(err)
@@ -22,12 +35,41 @@ router.get("/", auth, async (req, res) => {
 })
 
 router.get("/auth", auth, async (req, res) => {
+    console.log('auth');
+
     try {
-        res.render("main", {
-            main: "./auth",
-            stylesheets: ['auth', 'header', 'footer', 'sidebar', 'song', 'comment'],
-            scripts: ['auth'],
-            title: "Авторизація",
+        res.render("auth", {
+            user: req.user,
+        })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json(err);
+    }
+})
+
+router.get('/profile', auth, async (req, res) => {
+    console.log('profile');
+    
+    try {
+        if(!req.user) return res.status(404).render("404");
+
+        const music = await findUserMusic(req.user._id, 'createdAt');
+
+        res.render("profile", {
+            user: req.user,
+            music
+        })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json(err);
+    }
+})
+
+router.get('/upload-song', auth, async (req, res) => {
+    console.log('upload-song');
+    
+    try {
+        res.render("upload-song", {
             user: req.user,
         })
     } catch (err) {
@@ -37,15 +79,32 @@ router.get("/auth", auth, async (req, res) => {
 })
 
 router.get("/artist/:id", auth, async (req, res) => {
+    console.log('artist');
+    
     try {
         const id = req.params.id;
+        const sort = req.query.sort || 'likes';
 
-        res.render("main", {
-            main: "./artist",
-            stylesheets: ['artist', 'header', 'footer', 'sidebar', 'song', 'comment'],
-            scripts: ['artist'],
-            title: "Soundupe",
+        const ratings = await ArtistRating.find({ artist: id });
+        const rating = calculateRating(ratings);
+        const rated = await ArtistRating.findOne({ rater: req.user._id }) ? true : false;
+
+        const artist = await User.findById(id, '-password');
+
+        const music = await findUserMusic(req.user._id, sort);
+
+        const musicAll = await Song.find({ user: id });
+        const musicCount = musicAll.length;
+
+
+        res.render("artist", {
             user: req.user,
+            artist,
+            music,
+            musicCount,
+            sort,
+            rating,
+            rated
         })
     } catch (err) {
         console.error(err)
@@ -53,13 +112,9 @@ router.get("/artist/:id", auth, async (req, res) => {
     }
 })
 
-router.get("/mp3/id", auth, async (req, res) => {
+router.get("/mp3/:id", auth, async (req, res) => {
     try {
-        res.render("main", {
-            main: "./mp3",
-            stylesheets: ['mp3', 'header', 'footer', 'sidebar', 'song', 'comment'],
-            scripts: ['index'],
-            title: "Новинки",
+        res.render("mp3", {
             user: req.user,
         })
     } catch (err) {
@@ -70,12 +125,10 @@ router.get("/mp3/id", auth, async (req, res) => {
 
 
 router.get("/new", auth, async (req, res) => {
+    console.log('new');
+    
     try {
-        res.render("main", {
-            main: "./new",
-            stylesheets: ['new', 'header', 'footer', 'sidebar', 'song', 'comment'],
-            scripts: ['index'],
-            title: "Новинки",
+        res.render("new", {
             user: req.user,
         })
     } catch (err) {
@@ -85,12 +138,10 @@ router.get("/new", auth, async (req, res) => {
 })
 
 router.get("/popular", auth, async (req, res) => {
+    console.log('popular');
+    
     try {
-        res.render("main", {
-            main: "./popular",
-            stylesheets: ['popular', 'header', 'footer', 'sidebar', 'song', 'comment'],
-            scripts: ['index'],
-            title: "Новинки",
+        res.render("popular", {
             user: req.user,
         })
     } catch (err) {
@@ -101,11 +152,7 @@ router.get("/popular", auth, async (req, res) => {
 
 router.get("/artists", auth, async (req, res) => {
     try {
-        res.render("main", {
-            main: "./artists",
-            stylesheets: ['artists', 'header', 'footer', 'sidebar', 'comment'],
-            scripts: ['index'],
-            title: "Виконавці",
+        res.render("artists", {
             user: req.user,
         })
     } catch (err) {
@@ -116,11 +163,7 @@ router.get("/artists", auth, async (req, res) => {
 
 router.get("/genres", auth, async (req, res) => {
     try {
-        res.render("main", {
-            main: "./genre",
-            stylesheets: ['genre', 'header', 'footer', 'sidebar', 'comment'],
-            scripts: ['index'],
-            title: "Жанри",
+        res.render("genres", {
             user: req.user,
         })
     } catch (err) {
@@ -128,6 +171,13 @@ router.get("/genres", auth, async (req, res) => {
         res.status(500).json(err);
     }
 })
+
+
+router.use(auth, (req, res) => {
+    console.log('api router: not found');
+
+    res.status(404).render("404")
+});
 
 
 export default router;
