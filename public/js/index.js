@@ -1,8 +1,10 @@
 const pageControllers = {
     '/auth': initAuthPage,
+    '/profile': initProfilePage,
     '/upload-song': initUploadSongPage,
     '/artist': initArtistPage,
-    '/popular': initPopularPage
+    '/popular': initPopularPage,
+    '/mp3': initMp3Page
 };
 
 function matchRoute(url) {
@@ -26,7 +28,7 @@ async function loadPage(url) {
         temp.innerHTML = html;
 
         // Переносимо все, включно з <script>
-        Array.from(temp.childNodes).forEach(node => {
+        /* Array.from(temp.childNodes).forEach(node => {
             if (node.tagName === 'SCRIPT') {
                 const script = document.createElement('script');
                 if (node.src) {
@@ -39,6 +41,25 @@ async function loadPage(url) {
             } else {
                 main.appendChild(node);
             }
+        }); */
+
+        Array.from(temp.childNodes).forEach(node => {
+            if (node.tagName === 'SCRIPT') {
+                const script = document.createElement('script');
+                if (node.src) {
+                    script.src = node.src;
+                    script.async = false;
+                    main.appendChild(script);
+                } else {
+                    // Створення нового скрипта з inline-кодом
+                    const inlineScript = document.createElement('script');
+                    inlineScript.text = node.innerHTML; // або node.textContent
+                    inlineScript.async = false;
+                    main.appendChild(inlineScript);
+                }
+            } else {
+                main.appendChild(node.cloneNode(true));
+            }
         });
 
 
@@ -50,6 +71,7 @@ async function loadPage(url) {
         }
 
         updatePlayUI();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
         console.error('Помилка при завантаженні сторінки:', error);
     }
@@ -74,7 +96,6 @@ function playSong(songId) {
             if(playlist.length === 0) playlist = JSON.parse(window.musicList);
             currentSongIndex = findSongIndexById(songId);
 
-
             audio.pause();
             updatePlayUI();
             audio.currentSongId = songId;
@@ -85,6 +106,8 @@ function playSong(songId) {
             hasCountedValue = false;
             clearInterval(intervalId);
             intervalId = null;
+
+            updateFooterUI();
 
             audio.play();
         }
@@ -121,7 +144,13 @@ function addSongToPlaylist(id) {
 
 
 function updateFooterUI() {
+    const song = findSongByIdInPlaylist(audio.currentSongId);
 
+    if(song) {
+        const downloadBtn = document.getElementById('download');
+        downloadBtn.setAttribute('href', `/api/mp3/download/${song._id}`);
+        downloadBtn.setAttribute('download', `${song.title}.mpeg`);
+    }
 }
 
 function updatePlayUI() {
@@ -139,8 +168,8 @@ function updatePlayUI() {
                 songEl.querySelector('.play-icon').removeAttribute('hidden');
                 songEl.querySelector('.pause-icon').setAttribute('hidden', '');
                 songEl.querySelector('.play-pause-btn').classList.add('active');
+                songEl.classList.add('active');
             }
-            playPauseBtn.classList.add('active');
             playIcon.removeAttribute('hidden');
             pauseIcon.setAttribute('hidden', '');
         }
@@ -150,8 +179,8 @@ function updatePlayUI() {
                 songEl.querySelector('.play-icon').setAttribute('hidden', '');
                 songEl.querySelector('.pause-icon').removeAttribute('hidden');
                 songEl.querySelector('.play-pause-btn').classList.remove('active');
+                songEl.classList.remove('active');
             }
-            playPauseBtn.classList.remove('active');
             playIcon.setAttribute('hidden', '');
             pauseIcon.removeAttribute('hidden');
         }
@@ -175,7 +204,7 @@ function updateMetadataUI() {
 
 async function setReactionAtSong(songId, value, element) {
     try {
-        const res = await fetch(`/api/reaction/${songId}/${value}`, { method: "PUT"})
+        const res = await fetch(`/api/reaction/${songId}/${value}`, { method: "PUT" })
 
         const data = await res.json();
         console.log(data);
@@ -196,6 +225,21 @@ async function setReactionAtSong(songId, value, element) {
                     dislikeBtn.classList.add('active');
                 }
             }
+        }
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function logout() {
+    try {
+        const res = await fetch(`/api/auth/logout`, { method: "POST" })
+
+        const data = await res.json();
+        console.log(data);
+        if(res.ok) {
+            window.location.href = '/';
         }
         
     } catch (error) {
@@ -261,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 listenedTime += 1;
 
-                if (listenedTime >= audio.duration * 0.1) {
+                if (listenedTime >= audio.duration * 0.3) {
                     console.log('listened');
                     
 
@@ -271,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     fetch(`/api/listened/${audio.currentSongId}`, { method: "PUT" })
                         .then(res => res.json())
-                        .then(data => console.log(data.message))
+                        .then(data => console.log(data))
                         .catch(console.error);
                 }
             }, 1000);
@@ -352,6 +396,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 setReactionAtSong(id, value, element);
             }
 
+            const logoutBtn = event.target.closest('.logout-btn');
+            if(logoutBtn) {
+                logout();
+            }
+
         });
 
         document.querySelector('footer').addEventListener("click", function (event) {
@@ -409,7 +458,75 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    try {
+        function calculateDropdownRect(button, content) {
+            const buttonRect = button.getBoundingClientRect();
+            const contentRect = content.getBoundingClientRect();
+            const screenWidth = window.innerWidth;
+            const screeHeight = window.innerHeight;
 
+            // Якщо меню виходить за правий край, зміщуємо його ліворуч
+            if (buttonRect.right + contentRect.width > screenWidth) {
+                content.style.left = "auto";
+                content.style.right = "0";
+            } else {
+                content.style.left = "0";
+                content.style.right = "auto";
+            }
+
+            if (buttonRect.bottom + contentRect.height > screeHeight) {
+                content.style.top = "auto";
+                content.style.bottom = buttonRect.height + 'px';
+            } else {
+                content.style.top = buttonRect.height + 'px';
+                content.style.bottom = "auto";
+            }
+
+            content.style.width = "max-content";
+            content.style.height = "max-content";
+        }
+
+
+        document.querySelectorAll(".dropdown .content").forEach(content => {
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    const button = content.closest(".dropdown").querySelector("button");
+
+                    calculateDropdownRect(button, content);
+                });
+            });
+            
+            observer.observe(content, { childList: true, subtree: true });
+        });
+
+
+        document.addEventListener("click", function (event) {
+            const dropdown = event.target.closest(".dropdown");
+        
+            // Якщо клікнули поза dropdown — закриваємо всі
+            if (!dropdown) {
+                document.querySelectorAll(".dropdown .content").forEach(content => {
+                    content.setAttribute("hidden", "");
+                });
+                return;
+            }
+        
+            const button = dropdown.querySelector("button");
+            const content = dropdown.querySelector(".content");
+
+        
+            // Якщо клікнули по кнопці — перемикаємо видимість
+            if (event.target.closest("button") === button) {
+                // Закриваємо всі інші dropdown
+                document.querySelectorAll(".dropdown .content").forEach(c => c.setAttribute("hidden", ""));
+        
+                content.removeAttribute("hidden");
+                calculateDropdownRect(button, content);
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
 
 
 

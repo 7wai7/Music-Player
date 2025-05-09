@@ -26,26 +26,16 @@
         <% for (let i = 0; i < music.length; i++) { %>
             <% const song = music[i] %>
 
-            <%- include("./partials/song", { song }) %>
+            <%- include("./partials/song", { song, user }) %>
         <% } %>
     </div>
     <div class="pages-btns">
         <button></button>
     </div>
 </div>
-<hr>
-<div class="comments">
-    <div class="comments-top">Коментарі</div>
-    <%- include("./partials/add comment") %>
-    <div id="comments-content">
-        <% for (let i = 0; i < 20; i++) { %>
-            <%- include("./partials/comment") %>
-        <% } %>
-    </div>
-</div>
 
 
 <link rel="stylesheet" href="/css/index.css">
 <script>
-    window.musicList = '<%- JSON.stringify(music) %>';
+    window.musicList = `<%- JSON.stringify(music) %>`;
 </script>

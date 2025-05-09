@@ -1,5 +1,6 @@
 html {
     height: 100vh;
+    box-sizing: border-box;
 }
 
 body {
@@ -65,12 +66,14 @@ hr {
 }
 
 
-.dropdown {
+.dropdown,
+.dropdown-auto {
     width: max-content;
     position: relative;
 }
 
-.dropdown .content {
+.dropdown .content,
+.dropdown-auto .content {
     position: absolute;
     z-index: 1000;
     background-color: #ffffff;
@@ -82,7 +85,9 @@ hr {
 }
 
 .dropdown .content a,
-.dropdown .content button {
+.dropdown .content button,
+.dropdown-auto .content a,
+.dropdown-auto .content button {
     overflow: hidden;
     white-space: nowrap;
     padding: 0 10px;
@@ -94,11 +99,14 @@ hr {
 }
 
 .dropdown .content a:hover,
-.dropdown .content button:hover {
+.dropdown .content button:hover,
+.dropdown-auto .content a:hover,
+.dropdown-auto .content button:hover  {
     background-color: #dddddd;
 }
 
-.dropdown .v-line {
+.dropdown .v-line,
+.dropdown-auto .v-line {
     background: lightgray;
     width: 100%;
     height: 1px;
@@ -119,6 +127,7 @@ hr {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -142,6 +151,7 @@ hr {
     background: #cfcfcf;
     display: flex;
     flex-direction: row;
+    box-sizing: border-box;
 }
 
 .info,
@@ -155,6 +165,7 @@ header {
 .sidebar {
     background: #fff;
     margin-top: 7px;
+    box-sizing: border-box;
 }
 
 #main {
@@ -251,4 +262,54 @@ header {
     display: flex;
     flex-flow: column;
     gap: 20px;
+}
+
+
+
+.pagination {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: white;
+}
+
+.pagination a.active {
+    background: orange;
+    color: white;
+    font-weight: bold;
+}
+
+.pagination a:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.dropdown-auto .content {
+    display: none;
+}
+
+.dropdown-auto:hover .content {
+    display: flex;
+}
+
+
+
+@media (max-width: 600px) {
+    .info {
+        flex-direction: column;
+    }
+
+    #main {
+        width: 100%;
+    }
 }

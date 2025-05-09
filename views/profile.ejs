@@ -1,8 +1,29 @@
+<div id="change-song-data-modal" class="change-song-data-modal" hidden>
+    <div class="change-song-data-panel">
+        <div class="row" style="display: flex; justify-content: space-between;">
+            <span id="change-text" class="change-text" data-title="Змінити назву" data-lyrics="Змінити текст" data-delete="Видалити пісню?">Змінити</span>
+            <button class="hide-modal-btn">
+                <svg fill="#000000" width="24px" height="24px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fill-rule="evenodd"/>
+                </svg>
+            </button>
+        </div>
+        <span id="song-name"></span>
+        <input id="song-title-input" class="song-title-input" type="text">
+        <textarea id="song-lyrics-input" class="song-lyrics-input textarea-autosize" maxlength="5000"></textarea>
+        <div id="deleting-choose" class="deleting-choose row">
+            <button class="delete-btn">Видалити</button>
+            <button class="hide-modal-btn">Ні</button>
+        </div>
+        <button id="change-btn" class="change-btn">Змінити</button>
+    </div>
+</div>
 <div class="page-block profile-info">
     <img src="/api/avatar/id" class="avatar">
     <div class="metadata">
         <h2 class="login"><%= user.login %></h2>
         <span class="email"><%= user.email %></span>
+        <button id="logout-btn" class="logout-btn">Вихід</button>
         <a isLink href="/upload-song" class="upload-song-btn">
             <span>Завантажити пісню</span>
         </a>
@@ -15,13 +36,16 @@
         <% for (let i = 0; i < music.length; i++) { %>
             <% const song = music[i]; %>
 
-            <%- include("./partials/song", { song }) %>
+            <%- include("./partials/song", { song, user }) %>
         <% } %>
+    </div>
+    <div id="pagination" class="pagination">
+        <%- include('./partials/pagination', { songs: music, currentPage: 1 }) %>
     </div>
 </div>
 
 
 <link rel="stylesheet" href="/css/profile.css">
 <script>
-    window.musicList = '<%- JSON.stringify(music) %>';
+    window.musicList = `<%- JSON.stringify(music) %>`;
 </script>

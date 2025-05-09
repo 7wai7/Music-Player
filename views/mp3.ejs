@@ -1,5 +1,5 @@
 <div class="page-block">
-    <span class="title"><a isLink href="/artist/id" class="song-artist"><%= song.user.login %></a> - <span class="song-name"><%= song.title %></span></span>
+    <span class="title"><a isLink href="/artist/<%= song.user._id %>" class="song-artist"><%= song.user.login %></a> - <span class="song-name"><%= song.title %></span></span>
 
     <div class="song-info">
         <span>Дата додавання: <%= new Date(song.createDate).toLocaleDateString('uk-UA') %></span>
@@ -9,6 +9,14 @@
         <span>Прослуховування: <%= song.auditioning %></span>
     </div>
 </div>
+<% if(song.lyrics) { %>
+    <hr>
+    <div class="page-block">
+        <h3 class="page-block-top">Текст пісні</h3>
+        <div id="song-lyrics-container" class="song-lyrics-container shorten"><%= song.lyrics %></div>
+        <button id="more-lyrics-btn" class="more-lyrics-btn" data-more="Показати більше" data-less="Показати менше">Показати більше</button>
+    </div>
+<% } %>
 <hr>
 <div class="page-block">
     <h3 class="page-block-top">Популярна музика автора</h3>
@@ -16,17 +24,7 @@
         <% for (let i = 0; i < music.length; i++) { %>
             <% const song = music[i] %>
 
-            <%- include("./partials/song", { song }) %>
-        <% } %>
-    </div>
-</div>
-<hr>
-<div class="comments">
-    <div class="comments-top">Коментарі</div>
-    <%- include("./partials/add comment") %>
-    <div id="comments-content">
-        <% for (let i = 0; i < 20; i++) { %>
-            <%- include("./partials/comment") %>
+            <%- include("./partials/song", { song, user }) %>
         <% } %>
     </div>
 </div>
@@ -34,5 +32,5 @@
 
 <link rel="stylesheet" href="/css/mp3.css">
 <script>
-    window.musicList = '<%- JSON.stringify(music) %>';
+    window.musicList = `<%- JSON.stringify(music) %>`;
 </script>

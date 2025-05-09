@@ -71,3 +71,19 @@ header {
 .auth-btn:hover {
     background: orange;
 }
+
+@media (max-width: 500px) {
+    header .search-div {
+        display: contents;
+    }
+
+    header .search-div input {
+        display: none;
+    }
+
+    header .search-icon-btn {
+        border-radius: 12px;
+    }
+}
+
+

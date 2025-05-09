@@ -4,10 +4,6 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0);
 }
 
-.song .active {
-    border-bottom: 1px solid orange;
-}
-
 .song .row {
     height: 100%;
 }
@@ -22,7 +18,7 @@
     justify-content: center;
 }
 
-.song .play-pause-btn.active,
+.song.active .play-pause-btn,
 .song .play-pause-btn:hover {
     border: 3px solid orange;
 }
@@ -117,9 +113,29 @@
     border: 3px solid #456690;
 }
 
+.song .actions .delete-song-btn:hover rect,
+.song .actions .delete-song-btn:hover line {
+    stroke: red;
+}
+
 .song .duration {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 0 0 0 auto;
+}
+
+.song .actions .row {
+    align-items: center;
+}
+
+
+@media (max-width: 600px) {
+    .song.active .actions {
+        display: block;
+    }
+
+    .song .actions .date {
+        display: none;
+    }
 }

@@ -6,13 +6,14 @@ import Song from "./models/Song.js";
 const ObjectId = mongoose.Types.ObjectId;
 
 
-export const findUserMusic = async (user, id, sort, limit = 20) => {
+export const findUserMusic = async (user, id, sort, offset = 0, limit = 20) => {
     const music = await Song.aggregate([
         {
             $match: { user: new ObjectId(id) }
         },
         ...enrichSongAggregation(user?._id),
         { $sort: { [sort]: -1 } },
+        { $skip: offset },
         { $limit: limit }
     ]);
 
@@ -43,7 +44,7 @@ export const findPopularMusic = async (user, sort) => {
 
         case 'earlier':
             return await findMusicByYearPeriod(user, sort);
-            
+
         default:
             return await findTrends(user);
 
@@ -240,6 +241,39 @@ export const findPopularArtists = async () => {
 }
 
 
+export const changeSongTitle = async (user, id, title) => {
+    const song = await Song.findById(id);
+
+    if(!song) return { success: false, message: 'Song not found.' };
+    if(user._id.toString() !== song.user.toString()) return { success: false, message:'No access to delete the song' };
+
+    await Song.findByIdAndUpdate(id, { title });
+
+    return { success: true };
+}
+
+export const changeSongLyrics = async (user, id, lyrics) => {
+    const song = await Song.findById(id);
+
+    if(!song) return { success: false, message: 'Song not found.' };
+    if(user._id.toString() !== song.user.toString()) return { success: false, message:'No access to delete the song' };
+
+    await Song.findByIdAndUpdate(id, { lyrics })
+
+    return { success: true };
+}
+
+export const deleteSong = async (user, id) => {
+    const song = await Song.findById(id);
+
+    if(!song) return { success: false, message: 'Song not found.' };
+    if(user._id.toString() !== song.user.toString()) return { success: false, message:'No access to delete the song' };
+
+    await song.deleteOne();
+
+    return { success: true };
+}
+
 
 export const calculateRating = ratings => {
     let rating = 0;
@@ -301,6 +335,11 @@ function enrichSongAggregation(userId) {
                     ]
                 }
             }
-        }
+        },
+        {
+            $project: {
+                lyrics: 0
+            }
+        },
     ]
 }

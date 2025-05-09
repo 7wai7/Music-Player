@@ -1,0 +1,51 @@
+<%
+    const songsPerPage = 20;
+    const totalPages = Math.ceil(music.length / songsPerPage);
+    const current = currentPage || 1;
+
+    const renderButton = (label, page, isActive = false, isDisabled = false) => {
+%>
+    <a 
+        href="/profile/<%= page %>" isLInk
+        class="pagination-btn <%= isActive ? 'active' : '' %> <%= isDisabled ? 'disabled' : '' %>"
+        <%= isDisabled ? 'tabindex="-1"' : '' %>
+    >
+        <%= label %>
+    </a>
+<%
+    };
+%>
+
+<div class="pagination">
+    <% if(totalPages > 1) { %>
+
+        <% renderButton('«', current - 1, false, current === 1); %>
+
+        <%
+            const pagesToShow = [];
+            if (totalPages <= 7) {
+                for (let i = 1; i <= totalPages; i++) pagesToShow.push(i);
+            } else {
+                if (current <= 4) {
+                    pagesToShow.push(1, 2, 3, 4, 5, '...', totalPages);
+                } else if (current >= totalPages - 3) {
+                    pagesToShow.push(1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+                } else {
+                    pagesToShow.push(1, '...', current - 1, current, current + 1, '...', totalPages);
+                }
+            }
+
+            pagesToShow.forEach(p => {
+                if (p === '...') {
+        %>
+            <span class="pagination-ellipsis">...</span>
+        <%
+                } else {
+                    renderButton(p, p, p === current);
+                }
+            });
+        %>
+
+        <% renderButton('»', current + 1, false, current === totalPages); %>
+    <% } %>
+</div>

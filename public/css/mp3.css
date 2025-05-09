@@ -23,3 +23,24 @@
     padding: 0;
     margin-bottom: 20px;
 }
+
+
+.song-lyrics-container {
+    text-align: start;
+    margin-bottom: 20px;
+    white-space: pre-line;
+}
+
+.song-lyrics-container.shorten {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.more-lyrics-btn {
+    font-size: 14px;
+    align-self: self-start;
+}

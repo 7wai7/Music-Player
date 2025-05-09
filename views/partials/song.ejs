@@ -13,39 +13,54 @@
             </svg>
         </button>
         <div class="metadata">
-            <div class="artist-name"><%= song.user.login %></div>
-            <a isLink href="/mp3/<%= song._id %>" class="title"><%= song.title %></a>
+            <a isLink href="/artist/<%= song.user._id %>" class="artist-name">
+                <%= song.user.login %>
+            </a>
+            <a isLink href="/mp3/<%= song._id %>" class="title">
+                <%= song.title %>
+            </a>
         </div>
         <div class="duration">
             <div class="actions">
                 <div class="row">
-                    <span class="date"><%= new Date(song.createDate).toLocaleDateString('uk-UA') %></span>
+                    <span class="date">
+                        <%= new Date(song.createDate).toLocaleDateString('uk-UA') %>
+                    </span>
                     <div class="likes">
-                        <button class="like-btn <%= song.userReaction ? (song.userReaction.reaction ? 'active' : '') : '' %>" data-value="1">
-                            <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button
+                            class="like-btn <%= song.userReaction ? (song.userReaction.reaction ? 'active' : '') : '' %>"
+                            data-value="1">
+                            <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M7.66003 10.1022L11.76 4.00221C12.16 3.40221 13.16 3.00221 13.96 3.30221C14.86 3.60221 15.46 4.60221 15.26 5.50221L14.76 8.70221C14.66 9.40221 15.16 9.90221 15.76 9.90221H19.76C21.26 9.90221 22.1801 11.0522 21.66 12.5022C21.14 13.9522 20.6801 16.5522 19.26 18.8022C18.6102 19.8318 17.8975 20.5522 16.6801 20.5522C12.6801 20.5522 6.66003 20.5522 6.66003 20.5522"
-                                    stroke="#999"
-                                    stroke-width="1.5"
-                                    stroke-miterlimit="10" />
+                                    stroke="#999" stroke-width="1.5" stroke-miterlimit="10" />
                                 <path
                                     d="M2.18005 10.5522C2.18005 9.99996 2.62777 9.55225 3.18005 9.55225H6.68005C7.23234 9.55225 7.68005 9.99996 7.68005 10.5522V20.5522H3.18005C2.62777 20.5522 2.18005 20.1045 2.18005 19.5522V10.5522Z"
-                                    stroke="#999"
-                                    stroke-width="1.5" />
+                                    stroke="#999" stroke-width="1.5" />
                             </svg>
                         </button>
-                        <span class="count"><%= song.likes %></span>
+                        <span class="count">
+                            <%= song.likes %>
+                        </span>
                     </div>
                     <div class="dislikes">
-                        <button class="dislike-btn <%= song.userReaction ? (!song.userReaction.reaction ? 'active' : '') : '' %>" data-value="0">
-                            <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path id="vector" d="M16.34 13.8978L12.24 19.9978C11.84 20.5978 10.84 20.9978 10.04 20.6978C9.14 20.3978 8.54 19.3978 8.74 18.4978L9.24 15.2978C9.34 14.5978 8.84 14.0978 8.24 14.0978H4.24C2.74 14.0978 1.8199 12.9478 2.34 11.4978C2.86 10.0478 3.3199 7.44784 4.74 5.19784C5.3898 4.16823 6.1025 3.44784 7.31986 3.44784C11.3199 3.44784 17.34 3.44784 17.34 3.44784"
-                                stroke="#999" stroke-width="1.5" stroke-miterlimit="10"/>
-                                <path id="rec" d="M21.82 13.4478C21.82 14 21.3722 14.4478 20.82 14.4478H17.32C16.7677 14.4478 16.32 14 16.32 13.4478V3.44784H20.82C21.3722 3.44784 21.82 3.89555 21.82 4.44784V13.4478Z"
-                                stroke="#999" stroke-width="1.5"/>
+                        <button
+                            class="dislike-btn <%= song.userReaction ? (!song.userReaction.reaction ? 'active' : '') : '' %>"
+                            data-value="0">
+                            <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path id="vector"
+                                    d="M16.34 13.8978L12.24 19.9978C11.84 20.5978 10.84 20.9978 10.04 20.6978C9.14 20.3978 8.54 19.3978 8.74 18.4978L9.24 15.2978C9.34 14.5978 8.84 14.0978 8.24 14.0978H4.24C2.74 14.0978 1.8199 12.9478 2.34 11.4978C2.86 10.0478 3.3199 7.44784 4.74 5.19784C5.3898 4.16823 6.1025 3.44784 7.31986 3.44784C11.3199 3.44784 17.34 3.44784 17.34 3.44784"
+                                    stroke="#999" stroke-width="1.5" stroke-miterlimit="10" />
+                                <path id="rec"
+                                    d="M21.82 13.4478C21.82 14 21.3722 14.4478 20.82 14.4478H17.32C16.7677 14.4478 16.32 14 16.32 13.4478V3.44784H20.82C21.3722 3.44784 21.82 3.89555 21.82 4.44784V13.4478Z"
+                                    stroke="#999" stroke-width="1.5" />
                             </svg>
                         </button>
-                        <span class="count"><%= song.dislikes %></span>
+                        <span class="count">
+                            <%= song.dislikes %>
+                        </span>
                     </div>
                     <button class="add-to-playlist-btn">
                         <svg width="24px" height="24px" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"
@@ -60,9 +75,34 @@
                                 stroke-width="1.33358" fill="#456690" />
                         </svg>
                     </a>
+                    <% if(isProfilePage && song.user._id.toString() === user._id.toString()) { %>
+                        <div class="dropdown-auto">
+                            <button style="width: 20px; height: 20px; align-self: center;">
+                                <svg width="100%" height="100%" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M 99.047357,-340 Q 58.190323,-340 29.103415,-369.38333 0,-398.75 0,-439.99999 0,-481.25 29.103415,-510.61667 58.190323,-540 99.047357,-540 q 40.857033,0 69.960443,29.38333 29.08691,29.36667 29.08691,70.61668 0,41.24999 -29.08691,70.61666 Q 139.90439,-340 99.047357,-340 Z M 480,-340 q -40.85703,0 -69.94394,-29.38333 -29.10342,-29.36667 -29.10342,-70.61666 0,-41.25001 29.10342,-70.61668 Q 439.14297,-540 480,-540 q 40.85703,0 69.94394,29.38333 29.10342,29.36667 29.10342,70.61668 0,41.24999 -29.10342,70.61666 Q 520.85703,-340 480,-340 Z m 380.95265,0 q -40.85704,0 -69.96045,-29.38333 -29.08691,-29.36667 -29.08691,-70.61666 0,-41.25001 29.08691,-70.61668 Q 820.09561,-540 860.95265,-540 q 40.85703,0 69.94394,29.38333 Q 960,-481.25 960,-439.99999 960,-398.75 930.89659,-369.38333 901.80968,-340 860.95265,-340 Z"
+                                        fill="#000"/>
+                                </svg>
+                            </button>
+                            <nav class="content">
+                                <button class="change-song-title-btn">
+                                    <span>Змінити назву</span>
+                                </button>
+                                <button class="change-song-lyrics-btn">
+                                    <span>Змінити текст</span>
+                                </button>
+                                <hr>
+                                <button class="delete-song-btn">
+                                    <span>Видалити</span>
+                                </button>
+                            </nav>
+                        </div>
+                    <% } %>
                 </div>
             </div>
-            <span class="value"><%= formatTime(song.duration) %></span>
+            <span class="value">
+                <%= formatTime(song.duration) %>
+            </span>
         </div>
     </div>
 </div>

@@ -4,6 +4,7 @@ import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import ffprobe from 'ffprobe-static';
 import Song from '../models/Song.js';
+import Play from '../models/Play.js';
 
 ffmpeg.setFfprobePath(ffprobe.path);
 
@@ -47,6 +48,13 @@ export const uploadSongMiddleware = [
             song.size = fileSize;
             song.duration = duration;
             await song.save();
+
+            const play = new Play({
+                user: req.user._id,
+                song: song._id
+            });
+    
+            await play.save();
 
             res.json({ success: true });
         } catch (err) {
