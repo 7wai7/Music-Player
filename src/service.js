@@ -269,6 +269,8 @@ export const deleteSong = async (user, id) => {
     if(!song) return { success: false, message: 'Song not found.' };
     if(user._id.toString() !== song.user.toString()) return { success: false, message:'No access to delete the song' };
 
+    await Play.deleteMany({ song: song._id });
+
     await song.deleteOne();
 
     return { success: true };

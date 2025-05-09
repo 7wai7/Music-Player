@@ -44,8 +44,9 @@
 }
 
 .profile-info .avatar {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
     margin-right: 30px;
 }
 
