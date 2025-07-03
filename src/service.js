@@ -188,10 +188,10 @@ export const findNew = async (user) => {
 }
 
 export const findPopularArtists = async () => {
-    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    /* const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); */
 
     const authorStats = await Play.aggregate([
-        { $match: { createdAt: { $gte: sevenDaysAgo } } },
+        /* { $match: { createdAt: { $gte: sevenDaysAgo } } }, */
         {
             $lookup: {
                 from: "songs",
@@ -220,7 +220,8 @@ export const findPopularArtists = async () => {
                 }
             }
         },
-        { $sort: { authorScore: -1 } },
+        /* { $sort: { authorScore: -1 } }, */
+        { $sort: { totalPlays: -1 } },
         {
             $lookup: {
                 from: "users",
